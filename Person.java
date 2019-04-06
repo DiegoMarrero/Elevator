@@ -1,17 +1,14 @@
-import Floor;
-import Elevator;
-
 public class Person {
 
     // Variables
-    private int ID;                // person's unique ID #
-    private int destinationFloor;  // destination floor #
-    static int personCount = 0;        // total number of people
+    private int ID; // person's unique ID #
+    private final int destinationFloor; // destination floor #
+    private static int personCount = 0; // total number of people
 
-    //Constructor
+    // Constructor
     Person(int destFloor) {
-        ID++;
-        personCount++;
+        ID = ++personCount;
+        destinationFloor = destFloor;
 
         System.out.println("Person " + ID + " constructed");
     }
@@ -27,7 +24,7 @@ public class Person {
 
         // Notify floor person is coming
         System.out.println("Person " + ID + " steps onto the floor " + floor.getNumber());
-        floor.personArrive(this); 
+        floor.personArrives(this);
 
         // Press button floor
         System.out.println("Person " + ID + " presses floor button on floor" + floor.getNumber());
@@ -37,13 +34,13 @@ public class Person {
     // Person enters elevator
     public void enterElevator(Floor floor, Elevator elevator) {
 
-        floor.personBoardingElevator();  // Person leaves floor
-        
+        floor.personBoardingElevator(); // Person leaves floor
+
         elevator.passengerEnters(this); // Person enters elevator
 
         System.out.println("Person " + " presses elevator buttton");
         elevator.elevatorButton.pressButton();
-    }   
+    }
 
     // Person exits elevator
     public void exitElevator(Floor floor, Elevator elevator) {
