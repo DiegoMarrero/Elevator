@@ -48,7 +48,7 @@ public class Elevator {
     public void prepareToLeave(boolean leaving) {
         Floor thisFloor = currentFloor == Floor.FLOOR1 ? floor1 : floor2;
 
-        thisFloor.elevatortLeaving();
+        thisFloor.elevatorLeaving();
 
         door.closeDoor(thisFloor);
 
@@ -86,7 +86,7 @@ public class Elevator {
 
             System.out.println("elevator arrives on floor " + currentFloor);
 
-            arriveAtFloor(currentFloor == Floor.Floor1 ? floor1 : floor2);
+            arriveAtFloor(currentFloor == Floor.FLOOR1 ? floor1 : floor2);
         }
 
         System.out.println("elevator moving " + (direction == UP ? "up" : "down"));
