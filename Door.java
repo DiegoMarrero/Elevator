@@ -1,16 +1,13 @@
 public class Door {
 
-	boolean open;
+	private boolean open;
 
 	// constructor
 	public Door() {
 
 		open = false; // initialize open to false
 
-		{
-			System.out.println("door constructed");
-		}
-
+		System.out.println("door constructed");
 	}// end Door constructor
 
 	// open the door
