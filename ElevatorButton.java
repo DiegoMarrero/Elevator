@@ -1,11 +1,7 @@
-/**
- * ElevatorButton
- */
 public class ElevatorButton {
     private boolean pressed;
     private Elevator elevator;
 
-    
     public ElevatorButton(Elevator elevator) {
         this.pressed = false;
         this.elevator = elevator;
