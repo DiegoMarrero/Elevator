@@ -11,21 +11,21 @@ public class Door {
 	}// end Door constructor
 
 	// open the door
-	public void openDoor(Person passengerPtr, Person nextPassengerPtr, Floor currentFloor, Elevator elevator) {
+	public void openDoor(Person passenger, Person nextPassenger, Floor currentFloor, Elevator elevator) {
 		if (!open) { // if door is not open, open door
 			open = true;
 
 			System.out.println("elevator opens its door on floor" + currentFloor.getNumber());
 
 			// if passenger is in elevator, tell person to leave
-			if (passengerPtr != null) {
-				passengerPtr.exitElevator(currentFloor, elevator);
+			if (passenger != null) {
+				passenger.exitElevator(currentFloor, elevator);
 			} // end if
 
 			// if passenger waiting to enter elevator
 			// tell passenger to enter
-			if (nextPassengerPtr != null) {
-				nextPassengerPtr.enterElevator(elevator, currentFloor);
+			if (nextPassenger != null) {
+				nextPassenger.enterElevator(currentFloor, elevator);
 			}
 		} // end outer if
 	}// end function openDoor
