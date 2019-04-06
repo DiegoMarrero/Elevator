@@ -18,15 +18,15 @@ public class Door {
 			System.out.println("elevator opens its door on floor" + currentFloor.getNumber());
 
 			// if passenger is in elevator, tell person to leave
-			if (passengerPtr != 0) {
+			if (passengerPtr != null) {
 				passengerPtr.exitElevator(currentFloor, elevator);
-
 			} // end if
 
 			// if passenger waiting to enter elevator
 			// tell passenger to enter
-			if (nextPassengerPtr != 0)
+			if (nextPassengerPtr != null) {
 				nextPassengerPtr.enterElevator(elevator, currentFloor);
+			}
 		} // end outer if
 	}// end function openDoor
 
