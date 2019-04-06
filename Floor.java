@@ -1,6 +1,6 @@
 public class Floor {
-    static final int Floor1 = 1;
-    static final int Floor2 = 2;
+    static final int FLOOR1 = 1;
+    static final int FLOOR2 = 2;
 
     FloorButton floorButton;
 
