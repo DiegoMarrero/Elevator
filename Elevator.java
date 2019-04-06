@@ -1,6 +1,3 @@
-/**
- * Elevator
- */
 public class Elevator {
     ElevatorButton elevatorButton;
 
@@ -35,7 +32,7 @@ public class Elevator {
         floor2NeedsService = false;
         floor1 = firstFloor;
         floor2 = secondFloor;
-        passenger = new Person(0);
+        passenger = null;
 
         System.out.println("elevator constructed");
     }
@@ -78,7 +75,7 @@ public class Elevator {
     }
 
     public void passengerExits() {
-        passenger = new Person(0);
+        passenger = null;
     }
 
     private void processPossibleArrival() {
