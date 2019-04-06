@@ -18,6 +18,6 @@ public class Clock {
 
     // Return current time
     public int getTime() {
-        return clock;
+        return time;
     }
 }
