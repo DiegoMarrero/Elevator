@@ -42,4 +42,8 @@ public class Floor {
     public void personBoardingElevator() {
         occupant = null;
     }
+
+    public void setFloorButton(Elevator elevator) {
+        floorButton = new FloorButton(floorNumber, elevator);
+    }
 }
