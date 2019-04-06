@@ -8,8 +8,7 @@ public class ElevatorSimulation {
 		// Scanner instance
 		Scanner input = new Scanner(System.in);
 		
-		// Building class instance
-		//Building building = new Building();
+		Building building = new Building();
 		
 		int duration; // length of simulation in seconds
 		
@@ -18,7 +17,7 @@ public class ElevatorSimulation {
 		
 		System.out.println("*** ELEVATOR SIMULATION BEGINS ***");
 		
-		building.runSimulator(duration);
+		building.runSimulation(duration);
 		
 		System.out.println("*** ELEVATOR SIMULATION ENDS ***");
 	}
