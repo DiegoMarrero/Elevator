@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class ElevatorSimulation {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		// Scanner instance
 		Scanner input = new Scanner(System.in);
@@ -14,6 +13,7 @@ public class ElevatorSimulation {
 		
 		System.out.println("Enter run time: ");
 		duration = input.nextInt();
+		input.close();
 		
 		System.out.println("*** ELEVATOR SIMULATION BEGINS ***");
 		
