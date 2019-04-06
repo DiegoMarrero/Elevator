@@ -1,5 +1,3 @@
-package test;
-
 public class floorButton {
 	
 	int floor, floorNumber, elevatorRef;
