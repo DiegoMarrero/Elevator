@@ -5,14 +5,11 @@ public class Floor {
     FloorButton floorButton;
 
     private final int floorNumber;
-    private Elevator elevator;
     private Person occupant;
     private Light light;
 
-    public Floor(int number, Elevator elevator) {
-        floorButton = new FloorButton(number, elevator);
+    public Floor(int number) {
         floorNumber = number;
-        this.elevator = elevator;
         occupant = null;
         light = new Light(0);
     }
@@ -45,5 +42,4 @@ public class Floor {
     public void personBoardingElevator() {
         occupant = null;
     }
-
 }
