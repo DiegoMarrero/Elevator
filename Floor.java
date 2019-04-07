@@ -12,6 +12,8 @@ public class Floor {
         floorNumber = number;
         occupant = null;
         light = new Light(number);
+
+        System.out.println("floor " + floorNumber + " constructed");
     }
 
     public boolean isOccupied() {
