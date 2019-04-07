@@ -31,7 +31,7 @@ public class Scheduler {
     private void scheduleTime(Floor floor) {
         int floorNumber = floor.getNumber();
         Random rand = new Random();
-        
+
         int arrivalTime = _currentClockTime + (5 + rand.nextInt() % 16);
 
         if (floorNumber == Floor.FLOOR1) {
@@ -77,7 +77,7 @@ public class Scheduler {
 
         int arrivalTime;
 
-        if(floorNumber == Floor.FLOOR1) {
+        if (floorNumber == Floor.FLOOR1) {
             arrivalTime = _floor1ArrivalTime;
         } else {
             arrivalTime = _floor2ArrivalTime;
