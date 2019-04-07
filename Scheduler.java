@@ -2,15 +2,11 @@ import java.util.Random;
 
 public class Scheduler {
     private int _currentClockTime;
-    private Floor _floor1;
-    private Floor _floor2;
+    private Floor _floor1, _floor2;
 
-    private int _floor1ArrivalTime;
-    private int _floor2ArrivalTime;
+    private int _floor1ArrivalTime, _floor2ArrivalTime;
 
     public Scheduler(Floor floor1, Floor floor2) {
-        _currentClockTime = 0;
-
         _floor1 = floor1;
         _floor2 = floor2;
 
@@ -58,37 +54,21 @@ public class Scheduler {
     }
 
     private void createNewPerson(Floor floor) {
-        int destinationFloor;
-
-        if (floor.getNumber() == Floor.FLOOR1) {
-            destinationFloor = Floor.FLOOR2;
-        } else {
-            destinationFloor = Floor.FLOOR1;
-        }
-
-        Person person = new Person(destinationFloor);
+        Person person = new Person();
         person.stepOntoFloor(floor);
 
         scheduleTime(floor);
     }
 
     private void handleArrivals(Floor floor) {
-        int floorNumber = floor.getNumber();
 
-        int arrivalTime;
-
-        if(floorNumber == Floor.FLOOR1) {
-            arrivalTime = _floor1ArrivalTime;
-        } else {
-            arrivalTime = _floor2ArrivalTime;
-        }
+        int arrivalTime = floor.getNumber() == Floor.FLOOR1 ? _floor1ArrivalTime : _floor2ArrivalTime;
 
         if (arrivalTime == _currentClockTime) {
-            if (floor.isOccupied()) {
+            if (floor.isOccupied())
                 delayTime(floor);
-            } else {
+            else
                 createNewPerson(floor);
-            }
         }
     }
 }
