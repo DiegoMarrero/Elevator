@@ -25,18 +25,23 @@ public class Scheduler {
     }
 
     private void scheduleTime(Floor floor) {
-        int floorNumber = floor.getNumber();
-        Random rand = new Random();
-        
-        int arrivalTime = _currentClockTime + (5 + rand.nextInt() % 16);
+        int randomNumber = _getRandomNumber();
 
-        if (floorNumber == Floor.FLOOR1) {
+        int arrivalTime = _currentClockTime + (5 + randomNumber % 16);
+        int floorNumber = floor.getNumber();
+
+        if (floorNumber == Floor.FLOOR1)
             _floor1ArrivalTime = arrivalTime;
-        } else {
+        else
             _floor2ArrivalTime = arrivalTime;
-        }
 
         System.out.println("(scheduler schedules next person for floor " + floorNumber + " at time " + arrivalTime + ')');
+    }
+
+    private int _getRandomNumber(){
+        var rand = new Random();
+        int num = rand.nextInt();
+        return num > 0 ? num : num * -1;
     }
 
     private void delayTime(Floor floor) {
