@@ -1,6 +1,5 @@
 public class Person {
 
-    // Variables
     private final int ID; // person's unique ID #
     private static int personCount; // total number of people
 

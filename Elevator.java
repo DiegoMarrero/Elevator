@@ -77,10 +77,8 @@ public class Elevator {
             System.out.println("elevator arrives on floor " + this.currentFloor);
 
             arriveAtFloor(firstFloor ? floor1 : floor2);
-        } else {
+        } else
             System.out.println("elevator moving " + (direction == UP ? "up" : "down"));
-        }
-
     }
 
     private void processPossibleDeparture() {
@@ -89,11 +87,10 @@ public class Elevator {
         boolean currentFloorNeedsService = currentFloor ? floor1NeedsService : floor2NeedsService;
         boolean otherFloorNeedsService = currentFloor ? floor2NeedsService : floor1NeedsService;
 
-        if (currentFloorNeedsService) {
+        if (currentFloorNeedsService)
             arriveAtFloor(currentFloor ? floor1 : floor2);
-        } else if (otherFloorNeedsService) {
+        else if (otherFloorNeedsService)
             prepareToLeave(true);
-        }
     }
 
     private void arriveAtFloor(Floor arrivalFloor) {
@@ -110,13 +107,12 @@ public class Elevator {
 
         boolean otherFloorNeedsService = isCurrentFloorFirstFloor() ? floor2NeedsService : floor1NeedsService;
 
-        if (!currentFloorNeedsService) {
+        if (!currentFloorNeedsService)
             prepareToLeave(otherFloorNeedsService);
-        } else if (isCurrentFloorFirstFloor()) {
+        else if (isCurrentFloorFirstFloor())
             floor1NeedsService = false;
-        } else {
+        else
             floor2NeedsService = false;
-        }
     }
 
     private boolean isCurrentFloorFirstFloor() {

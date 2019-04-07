@@ -28,14 +28,14 @@ public class Floor {
     }
 
     public Person elevatorArrived() {
-        light.turnOn();
+        light.on();
         floorButton.reset();
 
         return occupant;
     }
 
     public void elevatorLeaving() {
-        light.turnOff();
+        light.off();
     }
 
     public void personBoardingElevator() {
