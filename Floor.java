@@ -1,6 +1,5 @@
 public class Floor {
-    static final int FLOOR1 = 1;
-    static final int FLOOR2 = 2;
+    static final int FLOOR1 = 1, FLOOR2 = 2;
 
     FloorButton floorButton;
 
@@ -8,10 +7,9 @@ public class Floor {
     private Person occupant;
     private Light light;
 
-    public Floor(int number) {
-        floorNumber = number;
-        occupant = null;
-        light = new Light(number);
+    public Floor(int floorNumber) {
+        this.floorNumber = floorNumber;
+        light = new Light(floorNumber);
 
         System.out.println("floor " + floorNumber + " constructed");
     }
@@ -26,13 +24,12 @@ public class Floor {
 
     public void personArrives(Person person) {
         occupant = person;
+        System.out.println("Person " + occupant.getID() + " steps onto the floor " + floorNumber);
     }
 
     public Person elevatorArrived() {
-        System.out.println("floor " + floorNumber + " resets its button");
-
-        floorButton.resetButton();
         light.turnOn();
+        floorButton.reset();
 
         return occupant;
     }

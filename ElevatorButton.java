@@ -1,17 +1,17 @@
 public class ElevatorButton {
-    private Elevator _elevator;
+    private Elevator elevator;
 
     public ElevatorButton(Elevator elevator) {
-        _elevator = elevator;
+        this.elevator = elevator;
         System.out.println("elevator button costructed");
     }
 
-    public void pressButton() {
+    public void press() {
         System.out.println("elevator button tells elevator to prepare to leave");
-        _elevator.prepareToLeave(true);
+        elevator.prepareToLeave(true);
     }
 
-    public void resetButton() {
+    public void reset() {
         System.out.println("elevator resets button");
     }
 }

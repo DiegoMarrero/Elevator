@@ -1,79 +1,62 @@
 public class Elevator {
     ElevatorButton elevatorButton;
 
-    final int UP = 0;
-    final int DOWN = 1;
-    final int ELEVATOR_TRAVEL_TIME = 5;
+    private static final int UP = 0, DOWN = 1, travelTime = 5;
 
     private Person passenger;
-    private Floor floor1;
-    private Floor floor2;
+    private Floor floor1, floor2;
 
-    private boolean moving;
-    private boolean floor1NeedsService;
-    private boolean floor2NeedsService;
+    private boolean moving, floor1NeedsService, floor2NeedsService;
 
-    private int direction;
-    private int arrivalTime;
-    private int currentFloor;
-    private int currentBuildingClockTime;
+    private int direction, arrivalTime, currentFloor, currentBuildingClockTime;
 
     private Bell bell;
     private Door door;
 
-    public Elevator(Floor firstFloor, Floor secondFloor) {
+    public Elevator(Floor floor1, Floor floor2) {
         elevatorButton = new ElevatorButton(this);
-        currentBuildingClockTime = 0;
-        moving = false;
         direction = UP;
         currentFloor = Floor.FLOOR1;
-        arrivalTime = 0;
-        floor1NeedsService = false;
-        floor2NeedsService = false;
-        floor1 = firstFloor;
-        floor2 = secondFloor;
-        passenger = null;
+        this.floor1 = floor1;
+        this.floor2 = floor2;
         door = new Door();
         bell = new Bell();
 
         System.out.println("elevator constructed");
     }
 
-    public void summonElevator(int floor) {
-        if (floor == Floor.FLOOR1) {
+    public void summon(int floor) {
+        if (floor == Floor.FLOOR1)
             floor1NeedsService = true;
-        } else {
+        else
             floor2NeedsService = true;
-        }
     }
 
     public void prepareToLeave(boolean leaving) {
-        Floor thisFloor = currentFloor == Floor.FLOOR1 ? floor1 : floor2;
-
+        var thisFloor = isCurrentFloorFirstFloor() ? floor1 : floor2;
+        
         thisFloor.elevatorLeaving();
+        door.close(thisFloor);
 
-        door.closeDoor(thisFloor);
-
-        if (leaving) {
+        if (leaving)
             move();
-        }
     }
 
     public void processTime(int time) {
         currentBuildingClockTime = time;
 
-        if (moving) {
+        if (moving)
             processPossibleArrival();
-        } else {
+        else
             processPossibleDeparture();
+        if (!moving)
             System.out.println("elevator at rest on floor " + currentFloor);
-        }
     }
 
     public void passengerEnters(Person person) {
         passenger = person;
 
-        System.out.println("person " + passenger.getID() + "enters elevator from floor " + currentFloor);
+        System.out.println("person " + passenger.getID() + " enters elevator from floor " + currentFloor);
     }
 
     public void passengerExits() {
@@ -81,26 +64,33 @@ public class Elevator {
     }
 
     private void processPossibleArrival() {
-        if (currentBuildingClockTime == arrivalTime) {
-            currentFloor = currentFloor == Floor.FLOOR1 ? Floor.FLOOR2 : Floor.FLOOR1;
+        // if elevator arrived at destination
+        if (currentBuildingClockTime == arrivalTime) { 
 
-            direction = currentFloor == Floor.FLOOR1 ? UP : DOWN;
+            // Update current floor
+            this.currentFloor = isCurrentFloorFirstFloor() ? Floor.FLOOR2 : Floor.FLOOR1;
 
-            System.out.println("elevator arrives on floor " + currentFloor);
+            boolean firstFloor = isCurrentFloorFirstFloor();
 
-            arriveAtFloor(currentFloor == Floor.FLOOR1 ? floor1 : floor2);
+            direction = firstFloor ? UP : DOWN;
+
+            System.out.println("elevator arrives on floor " + this.currentFloor);
+
+            arriveAtFloor(firstFloor ? floor1 : floor2);
+        } else {
+            System.out.println("elevator moving " + (direction == UP ? "up" : "down"));
         }
 
-        System.out.println("elevator moving " + (direction == UP ? "up" : "down"));
     }
 
     private void processPossibleDeparture() {
-        boolean currentFloorNeedsService = currentFloor == Floor.FLOOR1 ? floor1NeedsService : floor2NeedsService;
+        boolean currentFloor = isCurrentFloorFirstFloor();
 
-        boolean otherFloorNeedsService = currentFloor == Floor.FLOOR1 ? floor2NeedsService : floor1NeedsService;
+        boolean currentFloorNeedsService = currentFloor ? floor1NeedsService : floor2NeedsService;
+        boolean otherFloorNeedsService = currentFloor ? floor2NeedsService : floor1NeedsService;
 
         if (currentFloorNeedsService) {
-            arriveAtFloor(currentFloor == Floor.FLOOR1 ? floor1 : floor2);
+            arriveAtFloor(currentFloor ? floor1 : floor2);
         } else if (otherFloorNeedsService) {
             prepareToLeave(true);
         }
@@ -109,35 +99,37 @@ public class Elevator {
     private void arriveAtFloor(Floor arrivalFloor) {
         moving = false;
 
-        System.out.println("elevator resets button");
-
-        elevatorButton.resetButton();
-
-        bell.ringBell();
+        bell.ring();
+        elevatorButton.reset();
 
         Person floorPerson = arrivalFloor.elevatorArrived();
 
-        door.openDoor(passenger, floorPerson, arrivalFloor, this);
+        door.open(passenger, floorPerson, arrivalFloor, this);
 
-        boolean currentFloorNeedsService = currentFloor == Floor.FLOOR1 ? floor1NeedsService : floor2NeedsService;
+        boolean currentFloorNeedsService = isCurrentFloorFirstFloor() ? floor1NeedsService : floor2NeedsService;
 
-        boolean otherFloorNeedsService = currentFloor == Floor.FLOOR1 ? floor2NeedsService : floor1NeedsService;
+        boolean otherFloorNeedsService = isCurrentFloorFirstFloor() ? floor2NeedsService : floor1NeedsService;
 
         if (!currentFloorNeedsService) {
             prepareToLeave(otherFloorNeedsService);
-        } else if (currentFloor == Floor.FLOOR1) {
+        } else if (isCurrentFloorFirstFloor()) {
             floor1NeedsService = false;
         } else {
-            floor1NeedsService = false;
+            floor2NeedsService = false;
         }
+    }
+
+    private boolean isCurrentFloorFirstFloor() {
+        return currentFloor == Floor.FLOOR1;
     }
 
     private void move() {
         moving = true;
 
-        arrivalTime = currentBuildingClockTime + ELEVATOR_TRAVEL_TIME;
+        arrivalTime = currentBuildingClockTime + travelTime;
 
-        System.out.println("elevator begins moving " + (direction == DOWN ? "down" : "up") + " to floor"
-                + (direction == DOWN ? '1' : '2') + " (arrives at time " + arrivalTime + ")");
+        boolean goingDown = direction == DOWN;
+
+        System.out.println("elevator begins moving " + (goingDown ? "down" : "up") + " to floor " + (goingDown ? '1' : '2') + " (arrives at time " + arrivalTime + ")");
     }
 }

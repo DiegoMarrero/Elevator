@@ -1,44 +1,44 @@
 import java.util.Random;
 
 public class Scheduler {
-    private int _currentClockTime;
-    private Floor _floor1, _floor2;
+    private int currentClockTime;
+    private Floor floor1, floor2;
 
-    private int _floor1ArrivalTime, _floor2ArrivalTime;
+    private int floor1ArrivalTime, floor2ArrivalTime;
 
     public Scheduler(Floor floor1, Floor floor2) {
-        _floor1 = floor1;
-        _floor2 = floor2;
+        this.floor1 = floor1;
+        this.floor2 = floor2;
 
         System.out.println("scheduler constructed");
 
-        scheduleTime(_floor1);
-        scheduleTime(_floor2);
+        scheduleTime(floor1);
+        scheduleTime(floor2);
     }
 
     public void processTime(int time) {
 
-        _currentClockTime = time;
+        currentClockTime = time;
 
-        handleArrivals(_floor1);
-        handleArrivals(_floor2);
+        handleArrivals(floor1);
+        handleArrivals(floor2);
     }
 
     private void scheduleTime(Floor floor) {
-        int randomNumber = _getRandomNumber();
+        int randomNumber = getRandomNumber();
 
-        int arrivalTime = _currentClockTime + (5 + randomNumber % 16);
+        int arrivalTime = currentClockTime + (5 + randomNumber % 16);
         int floorNumber = floor.getNumber();
 
         if (floorNumber == Floor.FLOOR1)
-            _floor1ArrivalTime = arrivalTime;
+            floor1ArrivalTime = arrivalTime;
         else
-            _floor2ArrivalTime = arrivalTime;
+            floor2ArrivalTime = arrivalTime;
 
         System.out.println("(scheduler schedules next person for floor " + floorNumber + " at time " + arrivalTime + ')');
     }
 
-    private int _getRandomNumber(){
+    private int getRandomNumber(){
         var rand = new Random();
         int num = rand.nextInt();
         return num > 0 ? num : num * -1;
@@ -50,9 +50,9 @@ public class Scheduler {
         int arrivalTime;
 
         if (floorNumber == Floor.FLOOR1) {
-            arrivalTime = ++_floor1ArrivalTime;
+            arrivalTime = ++floor1ArrivalTime;
         } else {
-            arrivalTime = ++_floor2ArrivalTime;
+            arrivalTime = ++floor2ArrivalTime;
         }
 
         System.out.println("(scheduler delays next person for floor " + floorNumber + " until time " + arrivalTime + ')');
@@ -67,9 +67,9 @@ public class Scheduler {
 
     private void handleArrivals(Floor floor) {
 
-        int arrivalTime = floor.getNumber() == Floor.FLOOR1 ? _floor1ArrivalTime : _floor2ArrivalTime;
+        int arrivalTime = floor.getNumber() == Floor.FLOOR1 ? floor1ArrivalTime : floor2ArrivalTime;
 
-        if (arrivalTime == _currentClockTime) {
+        if (arrivalTime == currentClockTime) {
             if (floor.isOccupied())
                 delayTime(floor);
             else

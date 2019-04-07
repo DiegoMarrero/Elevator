@@ -3,7 +3,7 @@ public class Bell {
         System.out.println("bell created");
     }
 
-    public void ringBell() {
+    public void ring() {
         System.out.println("elevator rings its bell");
     }
 }

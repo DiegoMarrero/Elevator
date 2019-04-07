@@ -1,26 +1,26 @@
 public class FloorButton {
 
-	private final int _floorNumber;
-	private Elevator _elevator;
+	private final int floorNumber;
+	private Elevator elevator;
 
 	// constructor
 	public FloorButton(int floorNumber, Elevator elevator) {
-		_floorNumber = floorNumber;
-		_elevator = elevator;
+		this.floorNumber = floorNumber;
+		this.elevator = elevator;
 
-		System.out.println("floor " + _floorNumber + " button constructed");
+		System.out.println("floor " + floorNumber + " button constructed");
 	}// end FloorButton constructor
 
-	public void pressButton() {
-		System.out.println("floor " + _floorNumber + " button summons elevator");
+	public void press() {
+		System.out.println("floor " + floorNumber + " button summons elevator");
 
 		// call elevator to this floor
-		_elevator.summonElevator(_floorNumber);
-	}// end function pressButton
+		elevator.summon(floorNumber);
+	}// end function press
 
 	// reset button
 
-	public void resetButton() {
-		System.out.println("floor " + _floorNumber + " resets its button");
-	}// end function resetButton
+	public void reset() {
+		System.out.println("floor " + floorNumber + " resets its button");
+	}// end function reset
 }

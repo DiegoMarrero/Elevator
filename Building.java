@@ -1,21 +1,21 @@
 public class Building {
-    private Floor _floor1, _floor2;
-    private Elevator _elevator;
-    private Clock _clock;
-    private Scheduler _scheduler;
+    private Floor floor1, floor2;
+    private Elevator elevator;
+    private Clock clock;
+    private Scheduler scheduler;
 
     public Building() {
-        _clock = new Clock();
+        clock = new Clock();
 
-        _floor1 = new Floor(Floor.FLOOR1);
-        _floor2 = new Floor(Floor.FLOOR2);
+        floor1 = new Floor(Floor.FLOOR1);
+        floor2 = new Floor(Floor.FLOOR2);
 
-        _elevator = new Elevator(_floor1, _floor2);
+        elevator = new Elevator(floor1,floor2);
 
-        _floor1.setFloorButton(_elevator);
-        _floor2.setFloorButton(_elevator);
+        floor1.setFloorButton(elevator);
+        floor2.setFloorButton(elevator);
 
-        _scheduler = new Scheduler(_floor1, _floor2);
+        scheduler = new Scheduler(this.floor1, this.floor2);
 
         System.out.println("building constructed");
     }
@@ -24,11 +24,11 @@ public class Building {
         int currentTime = 0;
 
         while (currentTime < totalTime) {
-            _clock.tick();
-            currentTime = _clock.getTime();
+            clock.tick();
+            currentTime = clock.getTime();
 
-            _scheduler.processTime(currentTime);
-            _elevator.processTime(currentTime);
+            scheduler.processTime(currentTime);
+            elevator.processTime(currentTime);
         }
     }
 }

@@ -1,16 +1,16 @@
 public class Clock {
-    private int _time;
+    private int time;
 
     public Clock() {
         System.out.println("Clock constructed");
     }
 
     public void tick() {
-        _time++;
+        time++;
     }
 
     public int getTime() {
-        System.out.println("TIME: " + _time);
-        return _time;
+        System.out.println("TIME: " + time);
+        return time;
     }
 }
