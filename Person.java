@@ -1,33 +1,29 @@
 public class Person {
 
     // Variables
-    private int ID; // person's unique ID #
-    private final int destinationFloor; // destination floor #
-    private static int personCount = 0; // total number of people
+    private final int ID; // person's unique ID #
+    private static int personCount; // total number of people
 
     // Constructor
-    Person(int destFloor) {
-        ID = ++personCount;
-        destinationFloor = destFloor;
+    public Person() {
+        this.ID = ++this.personCount;
 
-        System.out.println("Person " + ID + " constructed");
+        System.out.println("Person " + this.ID + " constructed");
     }
 
     // return ID
     public int getID() {
-
-        return ID;
+        return this.ID;
     }
 
     // Person walks onto a floor
     public void stepOntoFloor(Floor floor) {
 
         // Notify floor person is coming
-        System.out.println("Person " + ID + " steps onto the floor " + floor.getNumber());
         floor.personArrives(this);
 
         // Press button floor
-        System.out.println("Person " + ID + " presses floor button on floor" + floor.getNumber());
+        System.out.println("Person " + this.ID + " presses floor button on floor " + floor.getNumber());
         floor.floorButton.pressButton();
     }
 
@@ -38,14 +34,14 @@ public class Person {
 
         elevator.passengerEnters(this); // Person enters elevator
 
-        System.out.println("Person " + " presses elevator buttton");
+        System.out.println("Person " + this.ID + " presses elevator buttton");
         elevator.elevatorButton.pressButton();
     }
 
     // Person exits elevator
     public void exitElevator(Floor floor, Elevator elevator) {
 
-        System.out.println("Person " + ID + " exits elevator on floor" + floor.getNumber());
+        System.out.println("Person " + this.ID + " exits elevator on floor" + floor.getNumber());
         elevator.passengerExits();
     }
 }
