@@ -33,6 +33,8 @@ public class Elevator {
         floor1 = firstFloor;
         floor2 = secondFloor;
         passenger = null;
+        door = new Door();
+        bell = new Bell();
 
         System.out.println("elevator constructed");
     }
