@@ -11,7 +11,7 @@ public class Floor {
     public Floor(int number) {
         floorNumber = number;
         occupant = null;
-        light = new Light(0);
+        light = new Light(number);
     }
 
     public boolean isOccupied() {
