@@ -1,23 +1,16 @@
 public class Clock {
+    private int _time;
 
-    // Class variables
-    private int time;
-
-    Clock() {
-
-        // Initialize time at 0
-        time = 0;
-
+    public Clock() {
         System.out.println("Clock constructed");
     }
 
-    // Increment time by 1
     public void tick() {
-        time++;
+        _time++;
     }
 
-    // Return current time
     public int getTime() {
-        return time;
+        System.out.println("TIME: " + _time);
+        return _time;
     }
 }

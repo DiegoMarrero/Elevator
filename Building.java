@@ -1,6 +1,5 @@
 public class Building {
-    private Floor _floor1;
-    private Floor _floor2;
+    private Floor _floor1, _floor2;
     private Elevator _elevator;
     private Clock _clock;
     private Scheduler _scheduler;
@@ -27,8 +26,6 @@ public class Building {
         while (currentTime < totalTime) {
             _clock.tick();
             currentTime = _clock.getTime();
-
-            System.out.println("TIME: " + _clock.getTime());
 
             _scheduler.processTime(currentTime);
             _elevator.processTime(currentTime);
