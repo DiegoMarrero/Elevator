@@ -39,7 +39,7 @@ public class Scheduler {
     }
 
     private int getRandomNumber(){
-        var rand = new Random();
+        Random rand = new Random();
         int num = rand.nextInt();
         return num > 0 ? num : num * -1;
     }

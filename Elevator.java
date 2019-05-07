@@ -33,7 +33,7 @@ public class Elevator {
     }
 
     public void prepareToLeave(boolean leaving) {
-        var thisFloor = isCurrentFloorFirstFloor() ? floor1 : floor2;
+        Floor thisFloor = isCurrentFloorFirstFloor() ? floor1 : floor2;
         
         thisFloor.elevatorLeaving();
         door.close(thisFloor);
