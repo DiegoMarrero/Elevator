@@ -9,9 +9,9 @@ public class Floor {
 
     public Floor(int floorNumber) {
         this.floorNumber = floorNumber;
-        light = new Light(floorNumber);
-
         System.out.println("floor " + floorNumber + " constructed");
+        
+        light = new Light(floorNumber);
     }
 
     public boolean isOccupied() {

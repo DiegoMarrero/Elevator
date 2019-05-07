@@ -14,6 +14,8 @@ public class Elevator {
     private Door door;
 
     public Elevator(Floor floor1, Floor floor2) {
+        System.out.println("elevator constructed");
+
         elevatorButton = new ElevatorButton(this);
         direction = UP;
         currentFloor = Floor.FLOOR1;
@@ -21,8 +23,6 @@ public class Elevator {
         this.floor2 = floor2;
         door = new Door();
         bell = new Bell();
-
-        System.out.println("elevator constructed");
     }
 
     public void summon(int floor) {

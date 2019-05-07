@@ -5,6 +5,8 @@ public class Building {
     private Scheduler scheduler;
 
     public Building() {
+        System.out.println("building constructed");
+
         clock = new Clock();
 
         floor1 = new Floor(Floor.FLOOR1);
@@ -16,8 +18,6 @@ public class Building {
         floor2.setFloorButton(elevator);
 
         scheduler = new Scheduler(this.floor1, this.floor2);
-
-        System.out.println("building constructed");
     }
 
     public void runSimulation(int totalTime) {
